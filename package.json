@@ -1,0 +1,48 @@
+{
+  "name": "loxnote",
+  "version": "1.2.0",
+  "description": "A lightweight plain text notepad built with Electron",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder",
+    "postdist": "rimraf LoxNote/win-unpacked LoxNote/builder-*.*"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^26.15.3"
+  },
+  "allowScripts": {
+    "electron@28.3.3": true
+  },
+  "dependencies": {
+    "archiver": "^8.0.0"
+  },
+  "build": {
+    "appId": "com.loxnote.app",
+    "productName": "LoxNote",
+    "directories": {
+      "output": "LoxNote"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "runAfterFinish": false
+    }
+  }
+}

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>历史记录 - LoxNote</title>
+  <link rel="stylesheet" href="history.css">
+</head>
+<body>
+  <div id="history-container">
+    <div id="history-header">
+      <div id="note-info">
+        <h2 id="note-title">加载中...</h2>
+        <div id="note-meta">
+          <span id="version-count">共 0 个版本</span>
+          <span id="note-created">创建: --</span>
+          <span id="note-modified">修改: --</span>
+        </div>
+      </div>
+      <div id="header-actions">
+        <button id="btn-compare-mode" title="对比模式">对比</button>
+        <button id="btn-refresh" title="刷新">刷新</button>
+      </div>
+    </div>
+
+    <div id="compare-selector" class="hidden">
+      <span>选择版本A:</span>
+      <select id="version-a-select"></select>
+      <span>选择版本B:</span>
+      <select id="version-b-select"></select>
+      <button id="btn-start-compare">开始对比</button>
+    </div>
+
+    <div id="main-content">
+      <div id="timeline-panel">
+        <h3>时间线</h3>
+        <div id="timeline-list"></div>
+      </div>
+
+      <div id="preview-panel">
+        <div id="preview-header">
+          <h3 id="preview-title">选择一个版本查看</h3>
+          <div id="preview-actions" class="hidden">
+            <button id="btn-restore-version" title="恢复到此版本">↩ 恢复</button>
+            <button id="btn-delete-version" title="删除此版本">删除</button>
+          </div>
+        </div>
+        <div id="preview-content">
+          <pre id="version-content">点击左侧时间线中的版本查看内容</pre>
+        </div>
+        <div id="preview-stats" class="hidden">
+          <span id="stat-chars">0 字符</span>
+          <span id="stat-lines">0 行</span>
+          <span id="stat-time">--</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="compare-view" class="hidden">
+      <div class="compare-header">
+        <h3>版本对比</h3>
+        <button id="btn-exit-compare">退出对比</button>
+      </div>
+      <div class="compare-content">
+        <div class="compare-panel">
+          <h4 id="compare-title-a">版本 A</h4>
+          <pre id="compare-content-a"></pre>
+        </div>
+        <div class="compare-panel">
+          <h4 id="compare-title-b">版本 B</h4>
+          <pre id="compare-content-b"></pre>
+        </div>
+      </div>
+      <div id="diff-summary" class="hidden">
+        <h4>差异统计</h4>
+        <div id="diff-stats"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="history.js"></script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Untitled - LoxNote</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="app-container">
+
+    <!-- 左侧笔记列表 -->
+    <div id="sidebar">
+      <!-- 1. 折叠按钮放在最外面 -->
+      <button id="btn-toggle-sidebar" title="Toggle Sidebar">☰</button>
+
+      <!-- 2. 其他所有内容包在这个 div 里 -->
+      <div id="sidebar-content">
+        <div id="sidebar-header">
+          <span id="sidebar-title">Notes</span>
+          <button id="btn-new-note" title="New Note">+</button>
+        </div>
+        <div id="note-search-container">
+          <input type="text" id="note-search" placeholder="Search notes...">
+        </div>
+        <div id="tag-filter-bar"></div>
+        <div id="note-list"></div>
+        <div id="trash-section">
+          <div id="trash-header" class="trash-header">
+            <span id="trash-title">Trash</span>
+            <div class="trash-header-actions">
+              <button id="btn-restore-all" title="Restore All"></button>
+              <button id="btn-clear-trash" title="Clear Trash"></button>
+            </div>
+          </div>
+          <div id="trash-list"></div>
+        </div>
+        <!-- 拖拽条 -->
+        <div id="sidebar-resizer"></div>
+      </div>
+    </div>
+
+    <!-- 右侧编辑区 -->
+    <div id="editor-container">
+      <!-- 查找栏（默认隐藏） -->
+      <div id="find-bar">
+        <input type="text" id="find-input" placeholder="Find...">
+        <input type="text" id="replace-input" placeholder="Replace...">
+        <span id="find-count"></span>
+        <button id="find-prev" title="Previous match">◂</button>
+        <button id="find-next" title="Next match">▸</button>
+        <button id="replace-btn" title="Replace">⇄</button>
+        <button id="replace-all-btn" title="Replace All">⇄⇄</button>
+        <button id="find-close" title="Close find bar">✕</button>
+      </div>
+
+      <!-- 文本编辑区 -->
+      <textarea id="editor" placeholder="Start typing..." wrap="soft"></textarea>
+
+      <!-- 预览模式（只读，[[笔记]] 渲染为可点击链接） -->
+      <div id="preview" class="preview-mode" style="display:none;"></div>
+
+      <!-- 底部状态栏 -->
+      <div id="status-bar">
+        <span id="status-text">Auto-saved</span>
+        <button id="btn-toggle-preview" title="Toggle Preview"></button>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
