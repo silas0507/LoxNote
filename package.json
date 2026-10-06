@@ -1,6 +1,6 @@
 {
   "name": "loxnote",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "A lightweight plain text notepad built with Electron",
   "main": "main.js",
   "scripts": {

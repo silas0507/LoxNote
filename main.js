@@ -15,6 +15,7 @@ let windowOpacity = 1;
 let currentFontSize = 14;
 let wordWrapEnabled = true;
 let closeBehavior = 'minimize';
+let autoLaunch = false;
 let currentTheme = 'light';
 let customShortcuts = {};
 let savedBounds = null; // 保存的窗口位置和大小
@@ -980,6 +981,8 @@ app.whenReady().then(() => {
   }
   // 先加载设置，再创建窗口（确保 closeBehavior 等配置生效）
   loadSettings();
+  // 应用开机自启动设置
+  app.setLoginItemSettings({ openAtLogin: autoLaunch });
   loadShortcuts();
   createWindow();
   createTray();
@@ -1075,6 +1078,7 @@ function loadSettings() {
       currentFontSize = data.fontSize ?? 14;
       wordWrapEnabled = data.wordWrap ?? true;
       closeBehavior = data.closeBehavior ?? 'minimize';
+      autoLaunch = data.autoLaunch ?? false;
       currentTheme = data.theme ?? 'light';
       savedBounds = data.windowBounds || null;
       // 启动时设置系统原生主题
@@ -1091,6 +1095,7 @@ function saveSettings() {
       fontSize: currentFontSize,
       wordWrap: wordWrapEnabled,
       closeBehavior: closeBehavior,
+      autoLaunch: autoLaunch,
       theme: currentTheme,
       windowBounds: savedBounds
     }, null, 2), 'utf-8');
@@ -1124,9 +1129,11 @@ ipcMain.on('request-settings', (event) => {
 
 // 请求通用设置
 ipcMain.on('request-general-settings', (event) => {
+  const loginSettings = app.getLoginItemSettings();
   event.sender.send('general-settings-loaded', {
     language: i18n.getCurrentLang(),
-    closeBehavior: closeBehavior
+    closeBehavior: closeBehavior,
+    autoLaunch: loginSettings.openAtLogin
   });
 });
 
@@ -1175,6 +1182,13 @@ ipcMain.on('set-language', (event, lang) => {
 // 设置关闭行为
 ipcMain.on('set-close-behavior', (event, behavior) => {
   closeBehavior = behavior;
+  saveSettings();
+});
+
+// 设置开机自启动
+ipcMain.on('set-auto-launch', (event, enabled) => {
+  autoLaunch = enabled;
+  app.setLoginItemSettings({ openAtLogin: enabled });
   saveSettings();
 });
 

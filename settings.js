@@ -246,10 +246,13 @@ function initGeneral() {
   const languageSelect = document.getElementById('language-select');
   const closeBehavior = document.getElementById('close-behavior');
 
+  const autoLaunch = document.getElementById('auto-launch');
+
   // 加载当前值
   ipcRenderer.on('general-settings-loaded', (event, data) => {
     languageSelect.value = data.language;
     closeBehavior.value = data.closeBehavior || 'minimize';
+    if (autoLaunch) autoLaunch.checked = !!data.autoLaunch;
   });
 
   // 语言切换
@@ -261,6 +264,13 @@ function initGeneral() {
   closeBehavior.addEventListener('change', () => {
     ipcRenderer.send('set-close-behavior', closeBehavior.value);
   });
+
+  // 开机自启动
+  if (autoLaunch) {
+    autoLaunch.addEventListener('change', () => {
+      ipcRenderer.send('set-auto-launch', autoLaunch.checked);
+    });
+  }
 
   ipcRenderer.send('request-general-settings');
 }
